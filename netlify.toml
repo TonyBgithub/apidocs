@@ -1,0 +1,28 @@
+[build]
+publish = "public"
+ignore = "false"
+
+[build.environment]
+CI = "true"
+NODE_VERSION = "12.18.4"
+# WARNING netlify-build ignores NPM_FLAGS when installing plugins, so use low-level NPM_CONFIG_ flag instead
+#NPM_FLAGS = "--no-optional"
+NPM_CONFIG_OPTIONAL = "false"
+
+# NOTE the --fetch flag is needed on both calls to update both the content and UI bundle (since the xref validator doesn't fetch the UI)
+
+[context.deploy-preview]
+command = """\
+node_modules/.bin/antora --fetch --generator=@antora/xref-validator ../antora-playbook.yml && \
+node_modules/.bin/antora --fetch --html-url-extension-style=indexify --redirect-facility=netlify --to-dir=public --url $DEPLOY_PRIME_URL ../antora-playbook.yml && \
+sed -i 's; 301$;&!;' public/_redirects\
+"""
+
+[[headers]]
+for = "/_/font/*"
+  [headers.values]
+  Cache-Control = "public,max-age=604800"
+
+# ...or define headers in _headers file to allow use of netlify command (not currently used)
+# /_/font/*
+#  Cache-Control: public,max-age=604800
