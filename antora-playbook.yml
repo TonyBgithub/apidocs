@@ -1,7 +1,7 @@
 site:
   title: TB Antora docs
   url: https://tbantoradocs.com
-  start_page: apidocs::index.adoc
+  start_page: docs-site::index.adoc
 git:
   ensure_git_suffix: false
 content:
