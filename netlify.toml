@@ -1,7 +1,7 @@
 [build]
 base = "netlify"
 publish = "public"
-command = "node_modules/.bin/antora --html-url-extension-style=indexify --pull --stacktrace ../antora-playbook.yml"
+command = "node_modules/.bin/antora --html-url-extension-style=indexify --pull --stacktrace ./antora-playbook.yml"
 
 [build.environment]
 NODE_VERSION = "12.18.4"
@@ -12,4 +12,4 @@ NODE_VERSION = "12.18.4"
 #GOOGLE_ANALYTICS_KEY = "..."
 
 [context.deploy-preview]
-command = "node_modules/.bin/antora --html-url-extension-style=indexify --pull --url $DEPLOY_PRIME_URL ../antora-playbook.yml"
+command = "node_modules/.bin/antora --html-url-extension-style=indexify --pull --url $DEPLOY_PRIME_URL ./antora-playbook.yml"
